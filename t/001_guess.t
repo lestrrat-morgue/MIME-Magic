@@ -17,7 +17,8 @@ my $magic = MIME::Magic->default;
 while ( my ($file, $mime) = each %TESTS ) {
     note "Guessing MIME for $file";
     my $got = $magic->guess_mime( $file );
-    is $got, $mime, "file = $file: got $got, expected $mime";
+    is $got, $mime, sprintf "file = %s: got %s, expected %s",
+        $file, $got || '(null)', $mime;
 }
 
 done_testing;
