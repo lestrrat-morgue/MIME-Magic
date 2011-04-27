@@ -14,18 +14,11 @@ sub new {
     my $class = shift;
     my $self = bless { @_ }, $class;
 
-    my $type = $self->type;
-    if ( $type =~ /^beshort$/ ) {
-        my $content = $self->content;
-        if ( $content =~ /^0x/ ) {
-            $self->content( hex $content );
-        }
-    } elsif ( $type eq 'string' ) {
-        my $content = $self->content;
-        $content =~ s/\\(\d{3})\b/chr oct $1/ge;
-        $content =~ s/\\x([a-fA-F0-9]+)/chr hex $1/ge;
-        $self->content( $content );
-    }
+    my $content = $self->content;
+    $content =~ s/\\(\d{3})/chr oct $1/ge;
+    $content =~ s/(?:0x|\\x)([a-fA-F0-9]+)/chr hex $1/ge;
+    $self->content( $content );
+
     return $self;
 }
 
@@ -49,17 +42,33 @@ sub match {
 
     # bogus entry. could happen if our parser wasn't smart enough
     # (which it isn't)
-    return unless $self->content;
+    my $content = $self->content;
+    return unless $content;
 
     my $type = $self->type;
 
     # "be" for big endian, "le" for little endian
+    # short -> 2 bytes, long -> 4 bytes
+
+    # XXX optimize this later
     if ($type eq "beshort") {
         # read 1 short (that's 2 bytes)
         my ($val) = unpack "n", $self->_peek($fh, 2);
-        return $val eq $self->content;
+        return $val eq $content;
+    } elsif ($type eq "belong") {
+        # read 1 short (that's 4 bytes)
+        my ($val) = unpack "N", $self->_peek($fh, 4);
+        return $val eq $content;
+    } elsif ($type eq "leshort") {
+        # read 1 short (that's 2 bytes)
+        my ($val) = unpack "v", $self->_peek($fh, 2);
+        return $val eq $content;
+    } elsif ($type eq "lelong") {
+        # read 1 short (that's 4 bytes)
+        my ($val) = unpack "V", $self->_peek($fh, 4);
+        return $val eq $content;
     } elsif ( $self->type eq "string") {
-        return $self->_peek( $fh, length($self->content) ) eq $self->content;
+        return $self->_peek( $fh, length($content) ) eq $content;
     } else {
 #        warn $self->type . " needs to be implemented";
     }
