@@ -1,5 +1,5 @@
 # DO NOT EDIT! This file was automatically generated with tools/make_default.pl
-# on Wed Apr 27 12:31:08 2011 from a magic file.
+# on Wed Apr 27 14:57:23 2011 from a magic file.
 package MIME::Magic::Default;
 use strict;
 use MIME::Magic::Rule;
@@ -222,7 +222,7 @@ our @MAGIC_ENTRIES = (
       }, 'MIME::Magic::Rule' ),
       bless( {
         'byte' => '38',
-        'content' => '<!DOCTYPE040svg',
+        'content' => '<!DOCTYPE\\040svg',
         'encoding' => undef,
         'mime' => 'image/svg+xml',
         'type' => 'string'
@@ -538,7 +538,7 @@ our @MAGIC_ENTRIES = (
     'rules' => [
       bless( {
         'byte' => '0',
-        'content' => '0x4De1',
+        'content' => 19937,
         'encoding' => undef,
         'mime' => 'audio/MP4A-LATM',
         'type' => 'beshort'
@@ -1110,7 +1110,7 @@ our @MAGIC_ENTRIES = (
     'rules' => [
       bless( {
         'byte' => '0',
-        'content' => 'PK003004',
+        'content' => 'PK',
         'encoding' => undef,
         'mime' => 'application/x-zip',
         'type' => 'string'
@@ -1132,7 +1132,7 @@ our @MAGIC_ENTRIES = (
     'rules' => [
       bless( {
         'byte' => '0',
-        'content' => '037036',
+        'content' => '',
         'encoding' => undef,
         'mime' => 'application/octet-stream',
         'type' => 'string'
@@ -1165,7 +1165,7 @@ our @MAGIC_ENTRIES = (
     'rules' => [
       bless( {
         'byte' => '0',
-        'content' => '377037',
+        'content' => 'ÿ',
         'encoding' => undef,
         'mime' => 'application/octet-stream',
         'type' => 'string'
@@ -1198,7 +1198,7 @@ our @MAGIC_ENTRIES = (
     'rules' => [
       bless( {
         'byte' => '257',
-        'content' => 'ustar0400400',
+        'content' => 'ustar \\0400',
         'encoding' => 'gnu',
         'mime' => 'application/x-tar',
         'type' => 'string'
@@ -1260,14 +1260,14 @@ our @MAGIC_ENTRIES = (
     'rules' => [
       bless( {
         'byte' => '0',
-        'content' => '0xedab',
+        'content' => 60843,
         'encoding' => undef,
         'mime' => undef,
         'type' => 'beshort'
       }, 'MIME::Magic::Rule' ),
       bless( {
         'byte' => '2',
-        'content' => '0xeedb',
+        'content' => 61147,
         'encoding' => undef,
         'mime' => 'application/x-rpm',
         'type' => 'beshort'
@@ -1806,7 +1806,7 @@ our @MAGIC_ENTRIES = (
     'rules' => [
       bless( {
         'byte' => '0',
-        'content' => '0xffd8',
+        'content' => 65496,
         'encoding' => undef,
         'mime' => 'image/jpeg',
         'type' => 'beshort'
@@ -1872,7 +1872,8 @@ our @MAGIC_ENTRIES = (
     'rules' => [
       bless( {
         'byte' => '0',
-        'content' => '012(',
+        'content' => '
+(',
         'encoding' => undef,
         'mime' => 'application/x-elc',
         'type' => 'string'
@@ -1883,7 +1884,7 @@ our @MAGIC_ENTRIES = (
     'rules' => [
       bless( {
         'byte' => '0',
-        'content' => ';ELC023000000000',
+        'content' => ';ELC   ',
         'encoding' => undef,
         'mime' => 'application/x-elc',
         'type' => 'string'
@@ -2015,7 +2016,7 @@ our @MAGIC_ENTRIES = (
     'rules' => [
       bless( {
         'byte' => '0',
-        'content' => '3760670043',
+        'content' => 'þ\\0670#',
         'encoding' => undef,
         'mime' => 'application/msword',
         'type' => 'string'
@@ -2026,7 +2027,7 @@ our @MAGIC_ENTRIES = (
     'rules' => [
       bless( {
         'byte' => '0',
-        'content' => '320317021340241261',
+        'content' => 'ÐÏà¡±',
         'encoding' => undef,
         'mime' => 'application/msword',
         'type' => 'string'
@@ -2037,7 +2038,7 @@ our @MAGIC_ENTRIES = (
     'rules' => [
       bless( {
         'byte' => '0',
-        'content' => '333245-000',
+        'content' => 'Û¥-000',
         'encoding' => undef,
         'mime' => 'application/msword',
         'type' => 'string'
@@ -2059,7 +2060,7 @@ our @MAGIC_ENTRIES = (
     'rules' => [
       bless( {
         'byte' => '0',
-        'content' => '004%!',
+        'content' => '%!',
         'encoding' => undef,
         'mime' => 'application/postscript',
         'type' => 'string'
@@ -2092,7 +2093,7 @@ our @MAGIC_ENTRIES = (
     'rules' => [
       bless( {
         'byte' => '0',
-        'content' => '367002',
+        'content' => '÷',
         'encoding' => undef,
         'mime' => 'application/x-dvi',
         'type' => 'string'
@@ -2103,7 +2104,7 @@ our @MAGIC_ENTRIES = (
     'rules' => [
       bless( {
         'byte' => '2',
-        'content' => '000021',
+        'content' => ' ',
         'encoding' => undef,
         'mime' => 'application/x-tex-tfm',
         'type' => 'string'
@@ -2114,7 +2115,7 @@ our @MAGIC_ENTRIES = (
     'rules' => [
       bless( {
         'byte' => '2',
-        'content' => '000022',
+        'content' => ' ',
         'encoding' => undef,
         'mime' => 'application/x-tex-tfm',
         'type' => 'string'
@@ -2539,7 +2540,7 @@ our @MAGIC_ENTRIES = (
     'rules' => [
       bless( {
         'byte' => '0',
-        'content' => '177ELF',
+        'content' => '\\177ELF',
         'encoding' => undef,
         'mime' => undef,
         'type' => 'string'
@@ -2675,7 +2676,7 @@ our @MAGIC_ENTRIES = (
     'rules' => [
       bless( {
         'byte' => '0',
-        'content' => 'x89PNG',
+        'content' => '‰PNG',
         'encoding' => undef,
         'mime' => 'image/png',
         'type' => 'string'
@@ -2686,7 +2687,7 @@ our @MAGIC_ENTRIES = (
     'rules' => [
       bless( {
         'byte' => '0',
-        'content' => 'x8aMNG',
+        'content' => 'ŠMNG',
         'encoding' => undef,
         'mime' => 'video/x-mng',
         'type' => 'string'
@@ -2697,7 +2698,7 @@ our @MAGIC_ENTRIES = (
     'rules' => [
       bless( {
         'byte' => '0',
-        'content' => 'x8aJNG',
+        'content' => 'ŠJNG',
         'encoding' => undef,
         'mime' => 'video/x-jng',
         'type' => 'string'
@@ -2719,7 +2720,7 @@ our @MAGIC_ENTRIES = (
     'rules' => [
       bless( {
         'byte' => '0',
-        'content' => '211HDFrn032',
+        'content' => '\\211HDFrn',
         'encoding' => undef,
         'mime' => 'application/x-hdf',
         'type' => 'string'
@@ -2785,7 +2786,7 @@ our @MAGIC_ENTRIES = (
     'rules' => [
       bless( {
         'byte' => '0',
-        'content' => '0x9900',
+        'content' => 39168,
         'encoding' => undef,
         'mime' => 'application/pgp',
         'type' => 'beshort'
@@ -2796,7 +2797,7 @@ our @MAGIC_ENTRIES = (
     'rules' => [
       bless( {
         'byte' => '0',
-        'content' => '0x9501',
+        'content' => 38145,
         'encoding' => undef,
         'mime' => 'application/pgp',
         'type' => 'beshort'
@@ -2807,7 +2808,7 @@ our @MAGIC_ENTRIES = (
     'rules' => [
       bless( {
         'byte' => '0',
-        'content' => '0x9500',
+        'content' => 38144,
         'encoding' => undef,
         'mime' => 'application/pgp',
         'type' => 'beshort'
@@ -2818,7 +2819,7 @@ our @MAGIC_ENTRIES = (
     'rules' => [
       bless( {
         'byte' => '0',
-        'content' => '0xa600',
+        'content' => 42496,
         'encoding' => undef,
         'mime' => 'application/pgp-encrypted',
         'type' => 'beshort'
@@ -2840,7 +2841,7 @@ our @MAGIC_ENTRIES = (
     'rules' => [
       bless( {
         'byte' => '0',
-        'content' => '-----BEGIN040PGP40MESSAGE-',
+        'content' => '-----BEGIN\\040PGP40MESSAGE-',
         'encoding' => undef,
         'mime' => 'application/pgp',
         'type' => 'string'
@@ -2851,7 +2852,7 @@ our @MAGIC_ENTRIES = (
     'rules' => [
       bless( {
         'byte' => '0',
-        'content' => '-----BEGIN040PGP40SIGNATURE-',
+        'content' => '-----BEGIN\\040PGP40SIGNATURE-',
         'encoding' => undef,
         'mime' => 'application/pgp-signature',
         'type' => 'string'
@@ -2862,7 +2863,7 @@ our @MAGIC_ENTRIES = (
     'rules' => [
       bless( {
         'byte' => '0',
-        'content' => '0x9901',
+        'content' => 39169,
         'encoding' => undef,
         'mime' => 'application/pgp',
         'type' => 'beshort'
@@ -2873,7 +2874,7 @@ our @MAGIC_ENTRIES = (
     'rules' => [
       bless( {
         'byte' => '0',
-        'content' => '0x8501',
+        'content' => 34049,
         'encoding' => undef,
         'mime' => 'application/pgp-encrypted',
         'type' => 'beshort'
@@ -3018,7 +3019,7 @@ our @MAGIC_ENTRIES = (
     'rules' => [
       bless( {
         'byte' => '0',
-        'content' => '224246056',
+        'content' => '”¦.',
         'encoding' => undef,
         'mime' => 'application/msword',
         'type' => 'string'
@@ -3051,7 +3052,7 @@ our @MAGIC_ENTRIES = (
     'rules' => [
       bless( {
         'byte' => '0',
-        'content' => '320317021340241261032341',
+        'content' => 'ÐÏà¡±á',
         'encoding' => undef,
         'mime' => undef,
         'type' => 'string'
@@ -3120,7 +3121,7 @@ our @MAGIC_ENTRIES = (
     'rules' => [
       bless( {
         'byte' => '0',
-        'content' => '320317021340241261032341',
+        'content' => 'ÐÏà¡±á',
         'encoding' => undef,
         'mime' => 'application/msword',
         'type' => 'string'
@@ -3142,7 +3143,7 @@ our @MAGIC_ENTRIES = (
     'rules' => [
       bless( {
         'byte' => '128',
-        'content' => 'PE000000',
+        'content' => 'PE  ',
         'encoding' => undef,
         'mime' => 'application/octet-stream',
         'type' => 'string'
@@ -3153,7 +3154,7 @@ our @MAGIC_ENTRIES = (
     'rules' => [
       bless( {
         'byte' => '0',
-        'content' => 'PE000000',
+        'content' => 'PE  ',
         'encoding' => undef,
         'mime' => 'application/octet-stream',
         'type' => 'string'

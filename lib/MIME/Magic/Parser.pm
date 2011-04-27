@@ -20,8 +20,23 @@ sub parse_file {
         s/^#.*$//;
         next unless $_;
 
+my $x = qr{
+    \\
+    (
+        (?!
+            (?:
+                [xX][a-fA-F0-9]+
+                |
+                [0-7]{3}
+            )
+        )
+        .
+    )
+}x;
         my ( $byte, $type, $content, $mime, $encoding ) =
-            map { s/\\(.)/$1/g; $_ } split /(?<!\\)\s+/;
+            map {
+                # leave hex, octal alone
+                s/$x/$1/g; $_ } split /(?<!\\)\s+/;
 
         if ( $byte =~ s/^>// ) {
             # use previous
