@@ -298,7 +298,7 @@
 #0	string		\037\235	application/x-compress
 
 # gzip (GNU zip, not to be confused with [Info-ZIP/PKWARE] zip archiver)
-#0       string          \037\213        application/x-gzip
+0       string          \037\213        application/x-gzip
 
 0		string			PK\003\004		application/x-zip
 
