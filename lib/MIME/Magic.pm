@@ -52,4 +52,16 @@ __END__
 
 MIME::Magic - Alternate MIME-Magic Guessing
 
+=head1 TODO
+
+=over 4
+
+=item implement "byte", "short", "long", "date", "ledate"
+
+=item implement the comparison operators: '<', '>', '&', et al
+
+=item add more test cases
+
+=back
+
 =cut
