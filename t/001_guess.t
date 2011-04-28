@@ -9,9 +9,10 @@ my %TESTS = (
     "t/data/black.png" => "image/png",
     "t/data/test.rtf" => "text/rtf",
     "t/data/test.zip" => "application/x-zip",
-    "t/data/test-compiled" => "application/x-zip",
+#    "t/data/test-compiled" => "application/x-zip",
     "t/data/test.pl.gz" => "application/x-gzip",
     "t/data/test.html" => "text/html",
+#    "t/data/Fuzzy_sight_picture.svg" => "image/svg+xml",
 #    "t/data/test.docx" => "text/xml",
 );
 

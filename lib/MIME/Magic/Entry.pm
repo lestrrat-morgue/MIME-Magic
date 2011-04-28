@@ -36,8 +36,6 @@ sub match {
 
     # check sub rules
     foreach my $rule ( @subrules ) {
-use Data::Dumper;
-warn "checking subrule for " . Dumper($rule);
         if ($rule->match( $fh ) ) {
             return $rule->mime;
         }
