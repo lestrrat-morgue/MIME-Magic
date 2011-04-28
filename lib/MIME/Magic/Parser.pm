@@ -10,6 +10,21 @@ sub parse_file {
     open my $fh, '<', $file or
         die "Failed to open file $file: $!";
 
+    # regexp used to remove superfulous backslashes
+    my $x = qr{
+        \\
+        (
+            (?!
+                (?:
+                    [xX][a-fA-F0-9]+
+                    |
+                    [0-7]{3}
+                )
+            )
+            .
+        )
+    }x;
+
     my @magic;
     while (<$fh>) {
         chomp;
@@ -20,23 +35,13 @@ sub parse_file {
         s/^#.*$//;
         next unless $_;
 
-my $x = qr{
-    \\
-    (
-        (?!
-            (?:
-                [xX][a-fA-F0-9]+
-                |
-                [0-7]{3}
-            )
-        )
-        .
-    )
-}x;
         my ( $byte, $type, $content, $mime, $encoding ) =
             map {
                 # leave hex, octal alone
-                s/$x/$1/g; $_ } split /(?<!\\)\s+/;
+                s/$x/$1/g;
+                $_
+            } split /(?<!\\)\s+/
+        ;
 
         if ( $byte =~ s/^>// ) {
             # use previous

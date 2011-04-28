@@ -17,7 +17,7 @@ sub new {
     my $content = $self->content;
     $content =~ s/\\(\d{3})/chr oct $1/ge;
     $content =~ s/(?:0x|\\x)([a-fA-F0-9]+)/chr hex $1/ge;
-    $self->content( $content );
+    $self->content( $self->type eq 'string' ? $content : ord $content );
 
     return $self;
 }
@@ -68,7 +68,8 @@ sub match {
         my ($val) = unpack "V", $self->_peek($fh, 4);
         return $val eq $content;
     } elsif ( $self->type eq "string") {
-        return $self->_peek( $fh, length($content) ) eq $content;
+        my $val = $self->_peek( $fh, length($content) );
+        return $val eq $content;
     } else {
 #        warn $self->type . " needs to be implemented";
     }
