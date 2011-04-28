@@ -35,6 +35,7 @@ sub parse_file {
         s/^#.*$//;
         next unless $_;
 
+        my $mask = 0;
         my ( $byte, $type, $content, $mime, $encoding ) =
             map {
                 # leave hex, octal alone
@@ -42,6 +43,9 @@ sub parse_file {
                 $_
             } split /(?<!\\)\s+/
         ;
+        if ($type =~ s/&0x([a-zA-Z0-9]+)//) {
+            $mask = hex $1;
+        }
 
         if ( $byte =~ s/^>// ) {
             # use previous
@@ -51,6 +55,7 @@ sub parse_file {
                 content => $content,
                 mime => $mime,
                 encoding => $encoding,
+                mask => $mask,
             );
         } else {
             my $magic = MIME::Magic::Entry->new;
@@ -62,6 +67,7 @@ sub parse_file {
                 content => $content,
                 mime => $mime,
                 encoding => $encoding,
+                mask => $mask,
             );
         }
     }

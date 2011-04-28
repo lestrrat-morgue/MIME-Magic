@@ -7,6 +7,7 @@ use Class::Accessor::Lite
         content
         mime
         encoding
+        mask
     ) ],
 ;
 
@@ -17,7 +18,13 @@ sub new {
     my $content = $self->content;
     $content =~ s/\\(\d{3})/chr oct $1/ge;
     $content =~ s/(?:0x|\\x)([a-fA-F0-9]+)/chr hex $1/ge;
-    $self->content( $self->type eq 'string' ? $content : ord $content );
+
+    my $type = $self->type;
+    if ( $type !~ /string/ ) {
+        $content = ord $content;
+    }
+
+    $self->content( $content );
 
     return $self;
 }
@@ -25,14 +32,14 @@ sub new {
 sub _peek {
     my ($self, $fh, $len) = @_;
     my $buf;
-    binmode $fh;
+    binmode $fh, ':raw';
     seek $fh, 0, 0;
     my $nread = read($fh, $buf, $len, $self->byte);
     if ($nread == 0) {
         die "PANIC: EOF while reading content";
     }
 
-    return $buf;
+    return $buf;# & $self->mask;
 }
     
 sub match {
@@ -54,22 +61,22 @@ sub match {
     if ($type eq "beshort") {
         # read 1 short (that's 2 bytes)
         my ($val) = unpack "n", $self->_peek($fh, 2);
-        return $val eq $content;
+        return $val && $val eq $content;
     } elsif ($type eq "belong") {
         # read 1 short (that's 4 bytes)
         my ($val) = unpack "N", $self->_peek($fh, 4);
-        return $val eq $content;
+        return $val && $val eq $content;
     } elsif ($type eq "leshort") {
         # read 1 short (that's 2 bytes)
         my ($val) = unpack "v", $self->_peek($fh, 2);
-        return $val eq $content;
+        return $val && $val eq $content;
     } elsif ($type eq "lelong") {
         # read 1 short (that's 4 bytes)
         my ($val) = unpack "V", $self->_peek($fh, 4);
-        return $val eq $content;
+        return $val && $val eq $content;
     } elsif ( $self->type eq "string") {
         my $val = $self->_peek( $fh, length($content) );
-        return $val eq $content;
+        return $val && $val eq $content;
     } else {
 #        warn $self->type . " needs to be implemented";
     }
