@@ -1,5 +1,5 @@
 # DO NOT EDIT! This file was automatically generated with tools/make_default.pl
-# on Thu Apr 28 11:59:39 2011 from a magic file.
+# on Thu Apr 28 12:23:11 2011 from a magic file.
 package MIME::Magic::Default;
 use strict;
 use MIME::Magic::Rule;
@@ -70,7 +70,7 @@ our @MAGIC_ENTRIES = (
         'encoding' => undef,
         'mask' => 0,
         'mime' => 'audio/x-mod',
-        'type' => 'string/c'
+        'type' => 'string'
       }, 'MIME::Magic::Rule' )
     ]
   }, 'MIME::Magic::Entry' ),
@@ -542,7 +542,7 @@ our @MAGIC_ENTRIES = (
         'encoding' => undef,
         'mask' => 0,
         'mime' => 'video/x-msvideo',
-        'type' => 'string/B'
+        'type' => 'string'
       }, 'MIME::Magic::Rule' ),
       bless( {
         'byte' => '8',
@@ -1754,7 +1754,7 @@ our @MAGIC_ENTRIES = (
         'encoding' => undef,
         'mask' => 0,
         'mime' => 'text/html',
-        'type' => 'string/cB'
+        'type' => 'string'
       }, 'MIME::Magic::Rule' )
     ]
   }, 'MIME::Magic::Entry' ),
@@ -1766,7 +1766,7 @@ our @MAGIC_ENTRIES = (
         'encoding' => undef,
         'mask' => 0,
         'mime' => 'text/html',
-        'type' => 'string/cb'
+        'type' => 'string'
       }, 'MIME::Magic::Rule' )
     ]
   }, 'MIME::Magic::Entry' ),
@@ -1778,7 +1778,7 @@ our @MAGIC_ENTRIES = (
         'encoding' => undef,
         'mask' => 0,
         'mime' => 'text/html',
-        'type' => 'string/cb'
+        'type' => 'string'
       }, 'MIME::Magic::Rule' )
     ]
   }, 'MIME::Magic::Entry' ),
@@ -1790,7 +1790,7 @@ our @MAGIC_ENTRIES = (
         'encoding' => undef,
         'mask' => 0,
         'mime' => 'text/html',
-        'type' => 'string/bc'
+        'type' => 'string'
       }, 'MIME::Magic::Rule' )
     ]
   }, 'MIME::Magic::Entry' ),
@@ -1814,7 +1814,7 @@ our @MAGIC_ENTRIES = (
         'encoding' => undef,
         'mask' => 0,
         'mime' => 'text/html',
-        'type' => 'string/c'
+        'type' => 'string'
       }, 'MIME::Magic::Rule' )
     ]
   }, 'MIME::Magic::Entry' ),
@@ -2631,7 +2631,7 @@ our @MAGIC_ENTRIES = (
         'encoding' => undef,
         'mask' => 0,
         'mime' => 'image/jp2',
-        'type' => 'string/B'
+        'type' => 'string'
       }, 'MIME::Magic::Rule' )
     ]
   }, 'MIME::Magic::Entry' ),
@@ -2675,7 +2675,7 @@ our @MAGIC_ENTRIES = (
         'encoding' => undef,
         'mask' => 0,
         'mime' => 'image/jp2',
-        'type' => 'string/B'
+        'type' => 'string'
       }, 'MIME::Magic::Rule' ),
       bless( {
         'byte' => '8',
@@ -2707,7 +2707,7 @@ our @MAGIC_ENTRIES = (
         'encoding' => undef,
         'mask' => 0,
         'mime' => 'audio/mp4',
-        'type' => 'string/B'
+        'type' => 'string'
       }, 'MIME::Magic::Rule' ),
       bless( {
         'byte' => '8',
@@ -2715,7 +2715,7 @@ our @MAGIC_ENTRIES = (
         'encoding' => undef,
         'mask' => 0,
         'mime' => 'video/quicktime',
-        'type' => 'string/B'
+        'type' => 'string'
       }, 'MIME::Magic::Rule' )
     ]
   }, 'MIME::Magic::Entry' ),

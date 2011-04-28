@@ -47,6 +47,9 @@ sub parse_file {
             $mask = hex $1;
         }
 
+        # XXX I can't find what this is from my source file. maybe it's new
+        $type =~ s/\/\w+$//;
+
         if ( $byte =~ s/^>// ) {
             # use previous
             $magic[-1]->add_rule(
