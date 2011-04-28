@@ -1,5 +1,15 @@
 package MIME::Magic;
 use strict;
+
+# XXX Enable this stuff when/if we come up with a XS version
+# BEGIN {
+#    # Attempt to require MIME::Magic::XS
+#    eval { require MIME::Magic::XS };
+#    if ($@) {
+#        require MIME::Magic::PP;
+#    }
+#}
+
 use MIME::Magic::Rule;
 use MIME::Magic::Entry;
 use MIME::Magic::Parser;
