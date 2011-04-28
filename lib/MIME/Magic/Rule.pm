@@ -74,6 +74,9 @@ sub match {
         # read 1 short (that's 4 bytes)
         my ($val) = unpack "V", $self->_peek($fh, 4);
         return $val && $val eq $content;
+    } elsif ( $self->type eq "byte") {
+        my $val = $self->_peek( $fh, 1 );
+        return $val && $val eq $content;
     } elsif ( $self->type eq "string") {
         my $val = $self->_peek( $fh, length($content) );
         return $val && $val eq $content;
