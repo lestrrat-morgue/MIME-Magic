@@ -1,5 +1,9 @@
 package MIME::Magic;
 use strict;
+use constant +{
+    MIME_DIRECTORY => "directory",
+    MIME_BINARY_UNKNOWN => "application/octet-stream"
+};
 
 # XXX Enable this stuff when/if we come up with a XS version
 # BEGIN {
@@ -10,9 +14,11 @@ use strict;
 #    }
 #}
 
-use MIME::Magic::Rule;
+use Fcntl ();
+use MIME::Magic::Buffer;
 use MIME::Magic::Entry;
 use MIME::Magic::Parser;
+use MIME::Magic::Rule;
 use Class::Accessor::Lite
     new => 1,
     rw => [ qw(
@@ -46,12 +52,48 @@ sub add_magic {
     unshift @{ $self->magic }, $magic;
 }
 
+sub fsmagic {
+    my ($self, $file) = @_;
+
+    my @st = stat( $file );
+    if (! @st) { # not found
+        die "File not found: $file";
+    }
+
+    # This probably doesn't work in Windows?
+    my $mode = $st[2];
+    if ( Fcntl::S_ISREG( $mode ) ) {
+        return (); # immediately break
+    } elsif ( Fcntl::S_ISDIR( $mode ) ) {
+        return MIME_DIRECTORY;
+    } elsif ( Fcntl::S_ISCHR( $mode ) ||
+              Fcntl::S_ISBLK( $mode ) ||
+              Fcntl::S_ISFIFO( $mode ) ||
+              Fcntl::S_ISSOCK( $mode ) )
+    {
+        return MIME_BINARY_UNKNOWN;
+    } else {
+        die "Invalid file type: $mode";
+    }
+}
+
 sub guess_mime {
     my ($self, $file) = @_;
-    open my $fh, '<', $file or die;
+
+
+    # weed out special types such as directories and such
+
+    if ( my $mime = $self->fsmagic( $file ) ) {
+        return $mime;
+    }
+
+    open my $fh, '<', $file
+        or die "Failed to open file $file: $!";
+    binmode $fh, ':raw';
+    my $buf = MIME::Magic::Buffer->new(fh => $fh);
 
     foreach my $magic ( @{ $self->{magic} } ) {
-        my $mime = $magic->match( $fh );
+        my $mime = $magic->match( $buf );
         if ($mime) {
             return $mime;
         }
