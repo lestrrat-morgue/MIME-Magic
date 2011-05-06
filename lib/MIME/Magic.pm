@@ -1,6 +1,7 @@
 package MIME::Magic;
 use strict;
 use constant +{
+    MIME_MAGIC_DEBUG => !!$ENV{MIME_MAGIC_DEBUG},
     MIME_DIRECTORY => "directory",
     MIME_BINARY_UNKNOWN => "application/octet-stream"
 };

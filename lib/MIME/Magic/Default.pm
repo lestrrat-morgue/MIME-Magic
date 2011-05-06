@@ -1,5 +1,5 @@
 # DO NOT EDIT! This file was automatically generated with tools/make_default.pl
-# on Fri May  6 14:48:05 2011 from a magic file.
+# on Fri May  6 17:59:31 2011 from a magic file.
 package MIME::Magic::Default;
 use strict;
 use MIME::Magic::Rule;
@@ -238,6 +238,14 @@ our @MAGIC_ENTRIES = (
         'mask' => 0,
         'mime' => undef,
         'start_at' => '0',
+        'type' => 'string'
+      }, 'MIME::Magic::Rule' ),
+      bless( {
+        'content' => 'http://www.w3.org/2000/svg',
+        'encoding' => undef,
+        'mask' => 0,
+        'mime' => 'image/svg+xml',
+        'start_at' => '8',
         'type' => 'string'
       }, 'MIME::Magic::Rule' ),
       bless( {
@@ -1217,12 +1225,12 @@ our @MAGIC_ENTRIES = (
   bless( {
     'rules' => [
       bless( {
-        'content' => 115,
-        'encoding' => 'application/x-gzip',
+        'content' => '‹',
+        'encoding' => undef,
         'mask' => 0,
-        'mime' => '\\037\\213',
-        'start_at' => '',
-        'type' => '0'
+        'mime' => 'application/x-gzip',
+        'start_at' => '0',
+        'type' => 'string'
       }, 'MIME::Magic::Rule' )
     ]
   }, 'MIME::Magic::Entry' ),
