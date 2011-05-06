@@ -101,6 +101,7 @@
 
 0	string		\<?xml
 #			text/xml
+>8  string      http://www.w3.org/2000/svg image/svg+xml
 >38	string		\<\!DOCTYPE\040svg	image/svg+xml
 
 
