@@ -5,6 +5,9 @@ all_from 'lib/MIME/Magic.pm';
 
 requires 'Class::Accessor::Lite';
 
+tests 't/*.t';
+author_tests 'xt/*.t';
+
 # got tired of writing this by hand
 postamble(<<'EOM');
 magic:
