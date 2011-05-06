@@ -11,6 +11,7 @@ my %TESTS = (
     "t/data/test.zip" => "application/x-zip",
     "t/data/test.pl.gz" => "application/x-gzip",
     "t/data/test.html" => "text/html",
+    "t/data/Fuzzy_sight_picture.svg" => "image/svg+xml",
 );
 
 my $magic = MIME::Magic->default;

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<!-- Downloaded from below for MIME-Magic
+    http://upload.wikimedia.org/wikipedia/commons/e/ed/Fuzzy_sight_picture.svg
+-->
+
+<svg
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   version="1.1"
+   width="210"
+   height="195"
+   id="svg2">
+  <defs
+     id="defs4">
+    <filter
+       x="-0.063779734"
+       y="-0.12299271"
+       width="1.1275595"
+       height="1.2459854"
+       color-interpolation-filters="sRGB"
+       id="filter3681">
+      <feGaussianBlur
+         id="feGaussianBlur3683"
+         stdDeviation="4.1209766" />
+    </filter>
+    <filter
+       color-interpolation-filters="sRGB"
+       id="filter3701">
+      <feGaussianBlur
+         id="feGaussianBlur3703"
+         stdDeviation="2.4494897" />
+    </filter>
+  </defs>
+  <rect
+     width="37.992744"
+     height="58.517498"
+     ry="0"
+     x="86.003632"
+     y="89.001678"
+     id="rect3656"
+     style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none" />
+  <path
+     d="m 30.714285,0.71428549 a 34.285713,35.714293 0 1 1 -68.571427,0 34.285713,35.714293 0 1 1 68.571427,0 z"
+     transform="matrix(0.72916669,0,0,0.70000001,107.60417,54.5)"
+     id="path2830"
+     style="fill:#9d9d9d;fill-opacity:1;fill-rule:nonzero;stroke:none;filter:url(#filter3701)" />
+  <g
+     transform="translate(-258.53625,-214.86218)"
+     id="g3664"
+     style="filter:url(#filter3681)">
+    <rect
+       width="34.320312"
+       height="80.414062"
+       x="286.0011"
+       y="305.61218"
+       id="rect3658"
+       style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none" />
+    <rect
+       width="155.07031"
+       height="42.664062"
+       x="286.0011"
+       y="343.36218"
+       id="rect3660"
+       style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none" />
+    <rect
+       width="34.244236"
+       height="79.907257"
+       x="406.82141"
+       y="306.11218"
+       id="rect3662"
+       style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none" />
+  </g>
+</svg>
