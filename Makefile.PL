@@ -5,6 +5,8 @@ all_from 'lib/MIME/Magic.pm';
 
 requires 'Class::Accessor::Lite';
 
+auto_set_repository;
+
 tests 't/*.t';
 author_tests 'xt/*.t';
 
