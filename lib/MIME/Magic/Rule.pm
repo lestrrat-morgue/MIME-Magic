@@ -2,7 +2,7 @@ package MIME::Magic::Rule;
 use strict;
 use Class::Accessor::Lite
     rw => [ qw(
-        byte
+        start_at
         type
         content
         mime
@@ -29,21 +29,8 @@ sub new {
     return $self;
 }
 
-sub _peek {
-    my ($self, $fh, $len) = @_;
-    my $buf;
-    binmode $fh, ':raw';
-    seek $fh, 0, 0;
-    my $nread = read($fh, $buf, $len, $self->byte);
-    if ($nread == 0) {
-        die "PANIC: EOF while reading content";
-    }
-
-    return $buf;# & $self->mask;
-}
-    
 sub match {
-    my ($self, $fh) = @_;
+    my ($self, $buffer) = @_;
 
     # XXX may need to do binmode(:raw)
 
@@ -60,26 +47,25 @@ sub match {
     # XXX optimize this later
     if ($type eq "beshort") {
         # read 1 short (that's 2 bytes)
-        my ($val) = unpack "n", $self->_peek($fh, 2);
+        my ($val) = unpack "n", substr $buffer, $self->start_at, 2;
         return $val && $val eq $content;
     } elsif ($type eq "belong") {
         # read 1 short (that's 4 bytes)
-        my ($val) = unpack "N", $self->_peek($fh, 4);
+        my ($val) = unpack "N", substr $buffer, $self->start_at, 4;
         return $val && $val eq $content;
     } elsif ($type eq "leshort") {
         # read 1 short (that's 2 bytes)
-        my ($val) = unpack "v", $self->_peek($fh, 2);
+        my ($val) = unpack "v", substr $buffer, $self->start_at, 2;
         return $val && $val eq $content;
     } elsif ($type eq "lelong") {
         # read 1 short (that's 4 bytes)
-        my ($val) = unpack "V", $self->_peek($fh, 4);
+        my ($val) = unpack "V", substr $buffer, $self->start_at, 4;
         return $val && $val eq $content;
     } elsif ( $self->type eq "byte") {
-        my $val = $self->_peek( $fh, 1 );
+        my $val = substr $buffer, $self->start_at, 1;
         return $val && $val eq $content;
     } elsif ( $self->type eq "string") {
-        my $val = $self->_peek( $fh, length($content) );
-        return $val && $val eq $content;
+        return index $buffer, $content, $self->start_at;
     } else {
 #        warn $self->type . " needs to be implemented";
     }

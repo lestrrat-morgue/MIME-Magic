@@ -36,7 +36,7 @@ sub parse_file {
         next unless $_;
 
         my $mask = 0;
-        my ( $byte, $type, $content, $mime, $encoding ) =
+        my ( $start_at, $type, $content, $mime, $encoding ) =
             map {
                 # leave hex, octal alone
                 s/$x/$1/g;
@@ -50,10 +50,10 @@ sub parse_file {
         # XXX I can't find what this is from my source file. maybe it's new
         $type =~ s/\/\w+$//;
 
-        if ( $byte =~ s/^>// ) {
+        if ( $start_at =~ s/^>// ) {
             # use previous
             $magic[-1]->add_rule(
-                byte => $byte,
+                start_at => $start_at,
                 type => $type,
                 content => $content,
                 mime => $mime,
@@ -65,7 +65,7 @@ sub parse_file {
             push @magic, $magic;
 
             $magic->add_rule(
-                byte => $byte,
+                start_at => $start_at,
                 type => $type,
                 content => $content,
                 mime => $mime,

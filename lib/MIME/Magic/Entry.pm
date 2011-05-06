@@ -22,10 +22,10 @@ sub add_rule {
 }
 
 sub match {
-    my ($self, $fh) = @_;
+    my ($self, $buffer) = @_;
     my ($main, @subrules) = @{ $self->rules };
 
-    if (! $main->match( $fh ) ) {
+    if (! $main->match( $buffer ) ) {
         return;
     }
 
@@ -36,7 +36,7 @@ sub match {
 
     # check sub rules
     foreach my $rule ( @subrules ) {
-        if ($rule->match( $fh ) ) {
+        if ($rule->match( $buffer ) ) {
             return $rule->mime;
         }
     }

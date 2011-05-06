@@ -20,13 +20,18 @@ use MIME::Magic::Entry;
 use MIME::Magic::Parser;
 use MIME::Magic::Rule;
 use Class::Accessor::Lite
-    new => 1,
     rw => [ qw(
         magic
+        read_buffer_size
     ) ]
 ;
 
 our $VERSION = '0.00001';
+
+sub new {
+    my $class = shift;
+    return bless { read_buffer_size => 4096, @_ }, $class;
+}
 
 sub default {
     my $class = shift;
@@ -82,15 +87,29 @@ sub guess_mime {
 
 
     # weed out special types such as directories and such
-
     if ( my $mime = $self->fsmagic( $file ) ) {
         return $mime;
     }
 
+    # once we got here, we need to read in the contents of the file
     open my $fh, '<', $file
         or die "Failed to open file $file: $!";
     binmode $fh, ':raw';
-    my $buf = MIME::Magic::Buffer->new(fh => $fh);
+
+    # read up to $self->read_buffer_size, which defaults to 4096
+    my $buf;
+    my $read = read $fh, $buf, $self->read_buffer_size, 0;
+    if ( ! defined $read ) {
+        die "Error while reading from file $file: $!";
+    }
+
+    if ( $read == 0 ) {
+        # XXX What, nothing to read?
+        return ();
+    }
+
+    # now check contents of the buffer 
+    # need to implement zmagic
 
     foreach my $magic ( @{ $self->{magic} } ) {
         my $mime = $magic->match( $buf );
