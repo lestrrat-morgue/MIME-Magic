@@ -16,7 +16,6 @@ use constant +{
 #}
 
 use Fcntl ();
-use MIME::Magic::Buffer;
 use MIME::Magic::Entry;
 use MIME::Magic::Parser;
 use MIME::Magic::Rule;
@@ -161,11 +160,18 @@ MIME::Magic - Alternate MIME-Magic Guessing
 This module attemmpts to do the equivalent of mod_mime_magic from Apache
 httpd server.
 
+=head1 "regex" RULE
+
+Since this being Perl, we allow a new rule "regex".
+
+    0   regex   your-regex-here     type
+
+This rule understands continuations, but DOES NOT take into account
+the leading offset. so just set it to 0
+
 =head1 TODO
 
 =over 4
-
-=item implement "byte", "short", "long", "date", "ledate"
 
 =item implement the comparison operators: '<', '>', '&', et al
 

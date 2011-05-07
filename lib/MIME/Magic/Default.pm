@@ -1,5 +1,5 @@
 # DO NOT EDIT! This file was automatically generated with tools/make_default.pl
-# on Fri May  6 17:59:31 2011 from a magic file.
+# on Sat May  7 10:45:16 2011 from a magic file.
 package MIME::Magic::Default;
 use strict;
 use MIME::Magic::Rule;
@@ -241,20 +241,32 @@ our @MAGIC_ENTRIES = (
         'type' => 'string'
       }, 'MIME::Magic::Rule' ),
       bless( {
-        'content' => 'http://www.w3.org/2000/svg',
-        'encoding' => undef,
-        'mask' => 0,
-        'mime' => 'image/svg+xml',
-        'start_at' => '8',
-        'type' => 'string'
-      }, 'MIME::Magic::Rule' ),
-      bless( {
         'content' => '<!DOCTYPE svg',
         'encoding' => undef,
         'mask' => 0,
         'mime' => 'image/svg+xml',
         'start_at' => '38',
         'type' => 'string'
+      }, 'MIME::Magic::Rule' )
+    ]
+  }, 'MIME::Magic::Entry' ),
+  bless( {
+    'rules' => [
+      bless( {
+        'content' => '<?xml',
+        'encoding' => undef,
+        'mask' => 0,
+        'mime' => undef,
+        'start_at' => '0',
+        'type' => 'string'
+      }, 'MIME::Magic::Rule' ),
+      bless( {
+        'content' => '<svg',
+        'encoding' => undef,
+        'mask' => 0,
+        'mime' => 'image/svg+xml',
+        'start_at' => '0',
+        'type' => 'regex'
       }, 'MIME::Magic::Rule' )
     ]
   }, 'MIME::Magic::Entry' ),
@@ -372,7 +384,7 @@ our @MAGIC_ENTRIES = (
         'content' => 6583086,
         'encoding' => undef,
         'mask' => 0,
-        'mime' => undef,
+        'mime' => '',
         'start_at' => '0',
         'type' => 'lelong'
       }, 'MIME::Magic::Rule' ),
@@ -446,7 +458,7 @@ our @MAGIC_ENTRIES = (
     'rules' => [
       bless( {
         'content' => 'AIFF',
-        'encoding' => undef,
+        'encoding' => '',
         'mask' => 0,
         'mime' => 'audio/x-aiff',
         'start_at' => '8',
@@ -458,7 +470,7 @@ our @MAGIC_ENTRIES = (
     'rules' => [
       bless( {
         'content' => 'AIFC',
-        'encoding' => undef,
+        'encoding' => '',
         'mask' => 0,
         'mime' => 'audio/x-aiff',
         'start_at' => '8',
@@ -470,7 +482,7 @@ our @MAGIC_ENTRIES = (
     'rules' => [
       bless( {
         'content' => '8SVX',
-        'encoding' => undef,
+        'encoding' => '',
         'mask' => 0,
         'mime' => 'audio/x-aiff',
         'start_at' => '8',
@@ -482,7 +494,7 @@ our @MAGIC_ENTRIES = (
     'rules' => [
       bless( {
         'content' => 'MThd',
-        'encoding' => undef,
+        'encoding' => '',
         'mask' => 0,
         'mime' => 'audio/unknown',
         'start_at' => '0',
@@ -494,7 +506,7 @@ our @MAGIC_ENTRIES = (
     'rules' => [
       bless( {
         'content' => 'CTMF',
-        'encoding' => undef,
+        'encoding' => '',
         'mask' => 0,
         'mime' => 'audio/unknown',
         'start_at' => '0',
@@ -506,7 +518,7 @@ our @MAGIC_ENTRIES = (
     'rules' => [
       bless( {
         'content' => 'SBI',
-        'encoding' => undef,
+        'encoding' => '',
         'mask' => 0,
         'mime' => 'audio/unknown',
         'start_at' => '0',
@@ -518,7 +530,7 @@ our @MAGIC_ENTRIES = (
     'rules' => [
       bless( {
         'content' => 'Creative Voice File',
-        'encoding' => undef,
+        'encoding' => '',
         'mask' => 0,
         'mime' => 'audio/unknown',
         'start_at' => '0',
@@ -2805,7 +2817,7 @@ our @MAGIC_ENTRIES = (
         'content' => 'ELF',
         'encoding' => undef,
         'mask' => 0,
-        'mime' => undef,
+        'mime' => '',
         'start_at' => '0',
         'type' => 'string'
       }, 'MIME::Magic::Rule' ),
@@ -3171,7 +3183,7 @@ our @MAGIC_ENTRIES = (
     'rules' => [
       bless( {
         'content' => 34049,
-        'encoding' => undef,
+        'encoding' => '',
         'mask' => 0,
         'mime' => 'application/pgp-encrypted',
         'start_at' => '0',
@@ -3185,7 +3197,7 @@ our @MAGIC_ENTRIES = (
         'content' => 'FWS',
         'encoding' => undef,
         'mask' => 0,
-        'mime' => undef,
+        'mime' => '',
         'start_at' => '0',
         'type' => 'string'
       }, 'MIME::Magic::Rule' ),

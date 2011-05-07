@@ -37,18 +37,18 @@ sub parse_file {
 
         my $mask = 0;
         my ( $start_at, $type, $content, $mime, $encoding ) =
-            map {
-                # leave hex, octal alone
-                s/$x/$1/g;
-                $_
-            } split /(?<!\\)\s+/
-        ;
-        if ($type =~ s/&0x([a-zA-Z0-9]+)//) {
+            split /(?<!\\)\s+/;
+
+        if ( $type =~ s/&0x([a-zA-Z0-9]+)// ) {
             $mask = hex $1;
         }
 
         # XXX I can't find what this is from my source file. maybe it's new
         $type =~ s/\/\w+$//;
+
+        if ( $type ne 'regex' ) {
+            $content =~ s/$x/$1/g;
+        }
 
         if ( $start_at =~ s/^>// ) {
             # use previous

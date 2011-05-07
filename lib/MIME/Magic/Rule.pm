@@ -17,12 +17,14 @@ sub new {
     my $self = bless { @_ }, $class;
 
     my $content = $self->content;
-    $content =~ s/\\(\d{3})/chr oct $1/ge;
-    $content =~ s/(?:0x|\\x)([a-fA-F0-9]+)/chr hex $1/ge;
-
     my $type = $self->type;
-    if ( $type !~ /string/ ) {
-        $content = ord $content;
+    if ($type ne 'regex') {
+        $content =~ s/\\(\d{3})/chr oct $1/ge;
+        $content =~ s/(?:0x|\\x)([a-fA-F0-9]+)/chr hex $1/ge;
+
+        if ( $type !~ /string/ ) {
+            $content = ord $content;
+        }
     }
 
     $self->content( $content );
@@ -51,8 +53,8 @@ sub match {
         my ($val) = unpack "n", substr $buffer, $self->start_at, 2;
         my $ok = $val && $val eq $content;
         if ( MIME::Magic::MIME_MAGIC_DEBUG() && $ok ) {
-            printf STDERR "[Rule] matched beshort '%d' at at offset %d",
-                $content, $self->start_at;
+            printf STDERR "[Rule %s] matched beshort '%d' at at offset %d",
+                $self->mime || '(null)', $content, $self->start_at;
         }
         return $ok;
     } elsif ($type eq "belong") {
@@ -92,10 +94,18 @@ sub match {
         return $ok;
     } elsif ( $self->type eq "string") {
         my $i = index $buffer, $content, $self->start_at;
-        if ( MIME::Magic::MIME_MAGIC_DEBUG() && $i >= 0 ) {
-            print STDERR "[Rule] matched string '$content' at offset $i\n";
+        if ( MIME::Magic::MIME_MAGIC_DEBUG() && $i == 0 ) {
+            printf STDERR "[Rule (%s)] matched string '%s' at offset %d\n",
+                $self->mime || '(null)', $content, $i;
         }
-        return $i >= 0;
+        return $i == 0;
+    } elsif ( $self->type eq 'regex' ) {
+        my $ok =  $buffer =~ /$content/;
+        if ( MIME::Magic::MIME_MAGIC_DEBUG() && $ok ) {
+            printf STDERR "[Rule (%s)] matched regex '%s'\n",
+                $self->mime || '(null)', $content;
+        }
+        return $ok;
     } else {
 #        warn $self->type . " needs to be implemented";
     }
