@@ -40,6 +40,8 @@ sub add_rule {
     } else {
         push @{ $self->{subrules} }, MIME::Magic::Rule->new(@_);
     }
+
+    $self->{subrules}->[-1];
 }
 
 sub match {

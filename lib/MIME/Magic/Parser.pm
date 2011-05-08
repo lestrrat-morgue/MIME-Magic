@@ -10,6 +10,12 @@ sub parse_file {
     open my $fh, '<', $file or
         die "Failed to open file $file: $!";
 
+    $self->parse_fh( $fh );
+}
+
+sub parse_fh {
+    my ($self, $fh) = @_;
+
     # regexp used to remove superfulous backslashes
     my $x = qr{
         \\
