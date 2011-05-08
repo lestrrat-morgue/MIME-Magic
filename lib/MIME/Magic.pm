@@ -16,12 +16,11 @@ use constant +{
 #}
 
 use Fcntl ();
-use MIME::Magic::Entry;
 use MIME::Magic::Parser;
 use MIME::Magic::Rule;
 use Class::Accessor::Lite
     rw => [ qw(
-        magic
+        rules
         read_buffer_size
     ) ]
 ;
@@ -30,31 +29,31 @@ our $VERSION = '0.00001';
 
 sub new {
     my $class = shift;
-    return bless { read_buffer_size => 4096, @_ }, $class;
+    return bless { rules => [], read_buffer_size => 4096, @_ }, $class;
 }
 
 sub default {
     my $class = shift;
 
     require MIME::Magic::Default;
-    $class->new(magic => \@MIME::Magic::Default::MAGIC_ENTRIES);
+    $class->new(rules => \@MIME::Magic::Default::RULES);
 }
 
 sub reset {
     my $self = shift;
-    $self->magic( undef );
+    $self->rules( [] );
 }
 
 sub parse_magic {
     my ($self, $file) = @_;
     my $p = MIME::Magic::Parser->new();
-    $self->magic( $p->parse_file($file) );
+    $self->rules( $p->parse_file($file) );
     $self;
 }
 
-sub add_magic {
-    my ($self, $magic) = @_;
-    unshift @{ $self->magic }, $magic;
+sub add_rule {
+    my ($self, $rule) = @_;
+    unshift @{ $self->rules }, $rule;
 }
 
 sub fsmagic {
@@ -111,8 +110,8 @@ sub guess_mime {
     # now check contents of the buffer 
     # need to implement zmagic
 
-    foreach my $magic ( @{ $self->{magic} } ) {
-        my $mime = $magic->match( $buf );
+    foreach my $rule ( @{ $self->rules } ) {
+        my $mime = $rule->match( $buf );
         if ($mime) {
             return $mime;
         }
@@ -132,6 +131,14 @@ MIME::Magic - Alternate MIME-Magic Guessing
 
     use MIME::Magic;
 
+    my $m = MIME::Magic->rules('apache'); # a la mod_mime_magic
+
+    # watch out, this may take a long time to load, and
+    # it may use more memory than you might think
+    my $m = MIME::Magic->rules('file');   # a la file(1) utility
+
+
+
     # use the default MIME magic map that comes with MIME::Magic
     # (see MIME::Magic::Default)
     my $m = MIME::Magic->new;
@@ -144,8 +151,7 @@ MIME::Magic - Alternate MIME-Magic Guessing
     $m->guess_mime( $another_filename );
 
     # define your own magic on the fly (will be prepended to the list)
-    my $magic = MIME::Magic::Entry->new;
-    $magic->add_rule( 
+    my $rule = MIME::Magic::Rule->new(
         byte => ...,
         type => ...,
         content => ...,
@@ -153,7 +159,7 @@ MIME::Magic - Alternate MIME-Magic Guessing
         encoding => ...,
         mask => ...,
     );
-    $m->add_magic( $magic );
+    $m->add_rule( $rule );
 
 =head1 DESCRIPTION
 

@@ -3,6 +3,7 @@ use strict;
 use MIME::Magic ();
 use Class::Accessor::Lite
     rw => [ qw(
+        subrules
         start_at
         type
         content
@@ -14,7 +15,7 @@ use Class::Accessor::Lite
 
 sub new {
     my $class = shift;
-    my $self = bless { @_ }, $class;
+    my $self = bless { subrules => [], @_ }, $class;
 
     my $content = $self->content;
     my $type = $self->type;
@@ -32,7 +33,38 @@ sub new {
     return $self;
 }
 
+sub add_rule {
+    my $self = shift;
+    if (@_ == 1) {
+        push @{ $self->{subrules} }, $_[0];
+    } else {
+        push @{ $self->{subrules} }, MIME::Magic::Rule->new(@_);
+    }
+}
+
 sub match {
+    my ($self, $buffer) = @_;
+
+    if (! $self->match_self( $buffer ) ) {
+        return;
+    }
+
+    return $self->match_subrules( $buffer ) || $self->mime;
+}
+
+sub match_subrules {
+    my ($self, $buffer) = @_;
+    # check sub rules
+    foreach my $rule ( @{ $self->subrules } ) {
+        if ($rule->match( $buffer ) ) {
+            return $rule->mime;
+        }
+    }
+    return;
+}
+
+
+sub match_self {
     my ($self, $buffer) = @_;
 
     # XXX may need to do binmode(:raw)

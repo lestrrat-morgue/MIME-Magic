@@ -1,6 +1,6 @@
 package MIME::Magic::Parser;
 use strict;
-use MIME::Magic::Entry;
+use MIME::Magic::Rule;
 use Class::Accessor::Lite
     new => 1
 ;
@@ -25,7 +25,8 @@ sub parse_file {
         )
     }x;
 
-    my @magic;
+    my @rules;
+    my @prev;
     while (<$fh>) {
         chomp;
 
@@ -50,31 +51,33 @@ sub parse_file {
             $content =~ s/$x/$1/g;
         }
 
-        if ( $start_at =~ s/^>// ) {
-            # use previous
-            $magic[-1]->add_rule(
+        if ( $start_at =~ s/^(>+)// ) {
+            my $level = length $1;
+            my $prev = $prev[ $level - 1];
+            if ( ! $prev) {
+                die "Could not find a parent rule to append rule at $.";
+            }
+            splice( @prev, $level, @prev - $level, $prev->add_rule(
                 start_at => $start_at,
                 type => $type,
                 content => $content,
                 mime => $mime,
                 encoding => $encoding,
                 mask => $mask,
-            );
+            ) );
         } else {
-            my $magic = MIME::Magic::Entry->new;
-            push @magic, $magic;
-
-            $magic->add_rule(
+            @prev = ( MIME::Magic::Rule->new(
                 start_at => $start_at,
                 type => $type,
                 content => $content,
                 mime => $mime,
                 encoding => $encoding,
                 mask => $mask,
-            );
+            ) );
+            push @rules, $prev[0];
         }
     }
-    return wantarray ? @magic : \@magic;
+    return wantarray ? @rules : \@rules;
 }
 
 1;

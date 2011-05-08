@@ -10,7 +10,7 @@ local $Data::Dumper::Terse = 1;
 local $Data::Dumper::Sortkeys = 1;
 local $Data::Dumper::Indent = 1;
 my $dump = Dumper $list;
-$dump =~ s/^\[/our \@MAGIC_ENTRIES = (/;
+$dump =~ s/^\[/our \@RULES = (/;
 $dump =~ s/\]$/)/;
 
 open my $fh, '>', 'lib/MIME/Magic/Default.pm';
@@ -21,7 +21,6 @@ printf $fh <<EOM, $0, scalar localtime, $dump;
 package MIME::Magic::Default;
 use strict;
 use MIME::Magic::Rule;
-use MIME::Magic::Entry;
 
 %s;
 
